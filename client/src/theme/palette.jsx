@@ -112,6 +112,27 @@ const palette = {
     hoverOpacity: 0.08,
     disabledOpacity: 0.48,
   },
+
+  widget2: {
+    lighter: "#FFE1A8",
+    darker: "#8C5D12",
+    dark: "#D19E1E",
+  },
+  widget1: {
+    lighter: "#C1E3FF",
+    darker: "#296FBB",
+    dark: "#489BDB",
+  },
+  widget3: {
+    lighter: "#C8E3A9",
+    darker: "#3B7F22",
+    dark: "#6AA12E",
+  },
+  widget4: {
+    lighter: "#F2B1D6",
+    darker: "#7E2E5A",
+    dark: "#B84389",
+  },
 };
 
 export default palette;

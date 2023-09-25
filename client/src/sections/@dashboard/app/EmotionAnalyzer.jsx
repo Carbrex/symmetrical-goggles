@@ -70,7 +70,7 @@ export default function EmotionAnalyzer({ title, subheader, ...other }) {
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
 
-      <Box sx={{ p: 3, pb: 1 }} dir="ltr">
+      <Box sx={{ p: 3, pb: 3 }} dir="ltr">
         <TreeView
           defaultCollapseIcon={<ExpandMoreIcon />}
           defaultExpandIcon={<ChevronRightIcon />}

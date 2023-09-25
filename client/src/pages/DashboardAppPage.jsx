@@ -5,7 +5,6 @@ import { useTheme } from "@mui/material/styles";
 import { Grid, Container, Typography } from "@mui/material";
 // components
 // import Iconify from "../components/iconify";
-import WordCloud from "../../public/assets/images/wordcloud.jpeg";
 
 // sections
 import {
@@ -19,6 +18,7 @@ import {
   AppCurrentSubject,
   AppConversionRates,
   EmotionAnalyzer,
+  AppWordCloud,
 } from "../sections/@dashboard/app";
 
 const gridItemStyle = {
@@ -36,7 +36,7 @@ export default function DashboardAppPage() {
       </Helmet>
 
       <Container maxWidth="xl">
-        <Typography variant="h4" sx={{ mb: 5, color: "#ccc" }}>
+        <Typography variant="h4" sx={{ mb: 2, color: "#ccc" }}>
           Hi, Welcome back
         </Typography>
 
@@ -45,6 +45,7 @@ export default function DashboardAppPage() {
             <AppWidgetSummary
               title="Weekly Sales"
               total={714000}
+              color="widget1"
               icon={"ant-design:android-filled"}
             />
           </Grid>
@@ -53,7 +54,7 @@ export default function DashboardAppPage() {
             <AppWidgetSummary
               title="New Users"
               total={1352831}
-              color="info"
+              color="widget2"
               icon={"ant-design:apple-filled"}
             />
           </Grid>
@@ -62,7 +63,7 @@ export default function DashboardAppPage() {
             <AppWidgetSummary
               title="Item Orders"
               total={1723315}
-              color="warning"
+              color="widget3"
               icon={"ant-design:windows-filled"}
             />
           </Grid>
@@ -71,38 +72,29 @@ export default function DashboardAppPage() {
             <AppWidgetSummary
               title="Bug Reports"
               total={234}
-              color="error"
+              color="widget4"
               icon={"ant-design:bug-filled"}
             />
           </Grid>
-          <Grid item xs={12} md={12} lg={12} style={gridItemStyle}>
-            <AppConversionRates
-              title="Most Repetitive Issues"
-              chartData={[
-                { label: "Login Not working", value: 56 },
-                { label: "Undelivered Product", value: 45 },
-                { label: "Printer Malfunctioning", value: 12 },
-                { label: "Quality unsatisfied", value: 5 },
-                { label: "Website Crashes", value: 28 },
-                { label: "Payment Errors", value: 32 },
-                { label: "Shipping Delays", value: 20 },
-                { label: "Missing Accessories", value: 8 },
-                { label: "App Freezes", value: 15 },
-              ]}
-            />
-          </Grid>
 
-          <Grid item xs={12} md={6} lg={4} style={gridItemStyle}>
+          {/* <Grid item xs={12} md={6} lg={4} style={gridItemStyle}>
             <img
-              src={WordCloud}
+              src={WordCloudImg}
               alt="wordcloud"
               style={{ width: "100%", height: "100%", objectFit: "contain" }}
+            />
+          </Grid> */}
+          <Grid item xs={12} md={6} lg={4} style={gridItemStyle}>
+            <AppWordCloud
+              title="Word Cloud"
+              subheader="Most used words by the coustomer"
             />
           </Grid>
 
           <Grid item xs={12} md={6} lg={4} style={gridItemStyle}>
             <AppCurrentVisits
               title="Mood Chart"
+              subheader="Callers Mood Percentage"
               chartData={[
                 { label: "Neutral", value: 8443 },
                 { label: "Sad", value: 4344 },
@@ -122,6 +114,7 @@ export default function DashboardAppPage() {
           <Grid item xs={12} md={6} lg={4} style={gridItemStyle}>
             <AppCurrentSubject
               title="Caller Reports"
+              subheader="Call Handler Report"
               chartLabels={["Neutral", "Sad", "Angry", "Disgust", "Happy"]}
               chartData={[
                 { name: "Caller Rohan", data: [80, 50, 30, 40, 100] },
@@ -131,6 +124,22 @@ export default function DashboardAppPage() {
               chartColors={[...Array(5)].map(
                 () => theme.palette.text.secondary
               )}
+            />
+          </Grid>
+          <Grid item xs={12} md={12} lg={12} style={gridItemStyle}>
+            <AppConversionRates
+              title="Most Repetitive Issues"
+              chartData={[
+                { label: "Login Not working", value: 56 },
+                { label: "Undelivered Product", value: 45 },
+                { label: "Printer Malfunctioning", value: 12 },
+                { label: "Quality unsatisfied", value: 5 },
+                { label: "Website Crashes", value: 28 },
+                { label: "Payment Errors", value: 32 },
+                { label: "Shipping Delays", value: 20 },
+                { label: "Missing Accessories", value: 8 },
+                { label: "App Freezes", value: 15 },
+              ]}
             />
           </Grid>
           <Grid item xs={12} md={12} lg={12} style={gridItemStyle}>
