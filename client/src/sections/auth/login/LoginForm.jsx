@@ -27,13 +27,21 @@ export default function LoginForm() {
   return (
     <>
       <Stack spacing={3}>
-        <TextField name="email" label="Email address" />
+        <TextField
+          name="email"
+          label="Email address"
+          InputLabelProps={{ sx: { color: "white" } }}
+          InputProps={{ sx: { color: "white" } }}
+          inputProps={{ style: { color: "white" } }}
+        />
 
         <TextField
           name="password"
           label="Password"
           type={showPassword ? "text" : "password"}
+          InputLabelProps={{ sx: { color: "white" } }}
           InputProps={{
+            sx: { color: "white" },
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton
@@ -47,6 +55,7 @@ export default function LoginForm() {
               </InputAdornment>
             ),
           }}
+          inputProps={{ style: { color: "white" } }}
         />
       </Stack>
 
@@ -56,8 +65,12 @@ export default function LoginForm() {
         justifyContent="space-between"
         sx={{ my: 2 }}
       >
-        <Checkbox name="remember" label="Remember me" />
-        <Link variant="subtitle2" underline="hover">
+        <Checkbox
+          name="remember"
+          label="Remember me"
+          sx={{ color: "white" }}
+        />
+        <Link variant="subtitle2" underline="hover" sx={{ color: "white" }}>
           Forgot password?
         </Link>
       </Stack>

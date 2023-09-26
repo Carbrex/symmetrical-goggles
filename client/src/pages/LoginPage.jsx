@@ -80,10 +80,10 @@ export default function LoginPage() {
           </StyledSection>
         )}
 
-        <Container maxWidth="sm" sx={{ color: "white" }}>
+        <Container maxWidth="xs" sx={{ color: "white" }}>
           <StyledContent>
             <Typography variant="h4" gutterBottom>
-              Sign in to Minimal
+              Sign in to Minimal as Admin
             </Typography>
 
             <Typography variant="body2" sx={{ mb: 5 }}>
@@ -91,40 +91,19 @@ export default function LoginPage() {
               <Link variant="subtitle2">Get started</Link>
             </Typography>
 
-            {/* <Stack direction="row" spacing={2}>
-              <Button fullWidth size="large" color="inherit" variant="outlined">
-                <Iconify
-                  icon="eva:google-fill"
-                  color="#DF3E30"
-                  width={22}
-                  height={22}
-                />
-              </Button>
+            <LoginForm />
+          </StyledContent>
+        </Container>
+        <Container maxWidth="xs" sx={{ color: "white" }}>
+          <StyledContent>
+            <Typography variant="h4" gutterBottom>
+              Sign in to Minimal as Caller
+            </Typography>
 
-              <Button fullWidth size="large" color="inherit" variant="outlined">
-                <Iconify
-                  icon="eva:facebook-fill"
-                  color="#1877F2"
-                  width={22}
-                  height={22}
-                />
-              </Button>
-
-              <Button fullWidth size="large" color="inherit" variant="outlined">
-                <Iconify
-                  icon="eva:twitter-fill"
-                  color="#1C9CEA"
-                  width={22}
-                  height={22}
-                />
-              </Button>
-            </Stack> */}
-
-            {/* <Divider sx={{ my: 3 }}>
-              <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                OR
-              </Typography>
-            </Divider> */}
+            <Typography variant="body2" sx={{ mb: 5 }}>
+              Don’t have an account? {""}
+              <Link variant="subtitle2">Get started</Link>
+            </Typography>
 
             <LoginForm />
           </StyledContent>
@@ -133,3 +112,4 @@ export default function LoginPage() {
     </>
   );
 }
+
