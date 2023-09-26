@@ -133,7 +133,7 @@ export default function UserPage() {
               }}
               // startIcon={<Iconify icon="eva:plus-fill" />}
             >
-              {isRecording ? "End" : "Start"} Recording
+              {isRecording ? "End" : "Start"} Call
             </Button>
 
             {isRecording && (
