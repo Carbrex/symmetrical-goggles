@@ -17,6 +17,10 @@ const MENU_OPTIONS = [
     icon: 'eva:person-fill',
   },
   {
+    label: 'Caller',
+    icon: 'eva:settings-2-fill',
+  },
+  {
     label: 'Settings',
     icon: 'eva:settings-2-fill',
   },

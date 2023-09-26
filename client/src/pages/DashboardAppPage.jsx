@@ -145,7 +145,7 @@ export default function DashboardAppPage() {
           <Grid item xs={12} md={12} lg={12} style={gridItemStyle}>
             <EmotionAnalyzer
               title="Emotion Analyzer"
-              subheader="+43% Happy coustomer than last month"
+              subheader="+43% Happy customer than last month"
             />
           </Grid>
           {/* <Grid item xs={12} md={12} lg={6}>
