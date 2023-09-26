@@ -83,7 +83,7 @@ export default function LoginPage() {
         <Container maxWidth="xs" sx={{ color: "white" }}>
           <StyledContent>
             <Typography variant="h4" gutterBottom>
-              Sign in to Minimal as Admin
+              Admin Sign in
             </Typography>
 
             <Typography variant="body2" sx={{ mb: 5 }}>
@@ -97,7 +97,7 @@ export default function LoginPage() {
         <Container maxWidth="xs" sx={{ color: "white" }}>
           <StyledContent>
             <Typography variant="h4" gutterBottom>
-              Sign in to Minimal as Caller
+              Caller Sign in
             </Typography>
 
             <Typography variant="body2" sx={{ mb: 5 }}>
@@ -112,4 +112,3 @@ export default function LoginPage() {
     </>
   );
 }
-

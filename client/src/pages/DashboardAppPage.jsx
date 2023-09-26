@@ -100,7 +100,7 @@ export default function DashboardAppPage() {
                 { label: "Sad", value: 4344 },
                 { label: "Angry", value: 1435 },
                 { label: "Happy", value: 3443 },
-                { label: "Disust", value: 4443 },
+                { label: "Disgust", value: 4443 },
               ]}
               chartColors={[
                 theme.palette.primary.main,

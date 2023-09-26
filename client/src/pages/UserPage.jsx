@@ -34,11 +34,11 @@ import USERLIST from "../_mock/user";
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: "name", label: "Name", alignRight: false },
-  { id: "company", label: "Company", alignRight: false },
-  { id: "role", label: "Role", alignRight: false },
-  { id: "isVerified", label: "Verified", alignRight: false },
-  { id: "status", label: "Status", alignRight: false },
+  { id: "name", label: "Call ID", alignRight: false },
+  { id: "company", label: "Call Duration", alignRight: false },
+  { id: "role", label: "Seniment Score S1", alignRight: false },
+  { id: "isVerified", label: "Seniment Score S2", alignRight: false },
+  { id: "status", label: "Transcript", alignRight: false },
   { id: "" },
 ];
 
@@ -89,7 +89,7 @@ export default function UserPage() {
 
   const [filterName, setFilterName] = useState("");
 
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleOpenMenu = (event) => {
     setOpen(event.currentTarget);
@@ -171,14 +171,8 @@ export default function UserPage() {
           mb={5}
         >
           <Typography variant="h4" gutterBottom sx={{ color: "white" }}>
-            User
+            Call Reports
           </Typography>
-          <Button
-            variant="contained"
-            startIcon={<Iconify icon="eva:plus-fill" />}
-          >
-            New User
-          </Button>
         </Stack>
 
         <Card>
@@ -204,15 +198,9 @@ export default function UserPage() {
                   {filteredUsers
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
-                      const {
-                        id,
-                        name,
-                        role,
-                        status,
-                        company,
-                        avatarUrl,
-                        isVerified,
-                      } = row;
+                      let { id, name, duration1, duration2, s1, s2 } = row;
+                      s1 = s1.toFixed(2);
+                      s2 = s2.toFixed(2);
                       const selectedUser = selected.indexOf(name) !== -1;
 
                       return (
@@ -229,38 +217,34 @@ export default function UserPage() {
                               onChange={(event) => handleClick(event, name)}
                             />
                           </TableCell>
-
                           <TableCell component="th" scope="row" padding="none">
                             <Stack
                               direction="row"
                               alignItems="center"
                               spacing={2}
                             >
-                              <Avatar alt={name} src={avatarUrl} />
+                              {/* <Avatar alt={name} src={avatarUrl} /> */}
                               <Typography variant="subtitle2" noWrap>
-                                {name}
+                                {id}
                               </Typography>
                             </Stack>
                           </TableCell>
-
-                          <TableCell align="left">{company}</TableCell>
-
-                          <TableCell align="left">{role}</TableCell>
-
                           <TableCell align="left">
-                            {isVerified ? "Yes" : "No"}
+                            {duration1 % 60} : {duration2 % 60}
                           </TableCell>
-
                           <TableCell align="left">
-                            <Label
-                              color={
-                                (status === "banned" && "error") || "success"
-                              }
-                            >
-                              {sentenceCase(status)}
-                            </Label>
+                            <p style={{ color: `${s1 > 0 ? "green" : "red"}` }}>
+                              {s1}
+                            </p>
                           </TableCell>
-
+                          <TableCell align="left">
+                            <p style={{ color: `${s2 > 0 ? "green" : "red"}` }}>
+                              {s2}
+                            </p>
+                          </TableCell>
+                          <TableCell align="left">
+                            <Label>Click to view</Label>
+                          </TableCell>
                           <TableCell align="right">
                             <IconButton
                               size="large"
