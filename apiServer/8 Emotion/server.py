@@ -101,7 +101,7 @@ WAVE_OUTPUT_FILE = "./output.wav"
 emotion = ''
 
 
-def modelRun(sid, sio):
+def modelRun():
     print('model start')
 
     # Open an input channel
@@ -163,7 +163,7 @@ def modelRun(sid, sio):
         #     'response': 'This is a response from the server2'}, room=sid)
         # sio.emit('emotion', {'response': emotions.get(max_emo, -1)}, room=sid)
         sio.emit('emotion', 'hello')
-        emotion = emotions.get(max_emo, -1)
+        # emotion = emotions.get(max_emo, -1)
 
         # print(100*'-')
 
@@ -191,7 +191,7 @@ def modelRun(sid, sio):
     total_predictions_np = np.mean(
         np.array(total_predictions).tolist(), axis=0)
     sio.emit('emotion', {
-        'response': emotions.get(np.argmax(total_predictions_np), -1)}, room=sid)
+        'response': emotions.get(np.argmax(total_predictions_np), -1)})
     # fig = plt.figure(figsize=(10, 5))
     # plt.bar(emo_list, total_predictions_np, color='indigo')
     # plt.ylabel("Mean probabilty (%)")
@@ -199,7 +199,6 @@ def modelRun(sid, sio):
     # plt.show()
 
     print(f"Emotions analyzed for: {(toc - tic):0.4f} seconds")
-    pass
 
 
 # Create a Socket.IO server instance
@@ -213,17 +212,6 @@ app = socketio.WSGIApp(sio)
 #     print('send emotion')
 #     sio.emit('emotion', {'response': emotion})
 
-def setInterval(func, interval):
-    while True:
-        func()
-        time.sleep(interval)
-
-# Example usage:
-
-
-def my_function():
-    print("This function is executed every 2 seconds.")
-    sio.emit('emotion', {'response': emotion})
 
 
 @sio.event
@@ -231,12 +219,19 @@ def connect(sid, environ):
     print(f"Client {sid} connected")
     sio.emit('emotion', {
         'response': 'This is a response from the server'}, room=sid)
-    setInterval(my_function, 7)
-    modelRun(sid, sio)
+    # setInterval(my_function, 7)
+    # modelRun(sid, sio)
     # sio.emit('emotion', {
     #     'response': 'This is a response from the server2'}, room=sid)
     print('model done')
 
+@sio.event
+def emotion(sid):
+    print(f"Client {sid} connected")
+    sio.emit('emotion', {
+        'response': 'This is a response from the serverdsasads'}, room=sid)
+    modelRun()
+    
 
 @sio.event
 def disconnect(sid):
