@@ -14,16 +14,26 @@ const connectDB = require("./db/connect");
 const app = express();
 const server = http.createServer(app);
 
-// //scoket.io
-// const io = require("socket.io")(server, {
-//   cors: {
-//     origin: ["http://localhost:5173", "https://admin.socket.io", "*"],
-//   },
-// });
-// require("./socketio")(io);
-// //Admin UI
-// const { instrument } = require("@socket.io/admin-ui");
-// instrument(io, { auth: false });
+//scoket.io
+const io = require("socket.io")(server, {
+  cors: {
+    origin: ["http://localhost:5173", "https://admin.socket.io", "*"],
+  },
+});
+require("./socketio")(io);
+//Admin UI
+const { instrument } = require("@socket.io/admin-ui");
+instrument(io, { auth: false });
+
+//Peer JS
+const { ExpressPeerServer } = require("peer");
+const peerServer = ExpressPeerServer(server, {
+  path: "/myapp",
+});
+app.use((req, res, next) => {
+  console.log("Hello from Peer");
+  next();
+}, peerServer);
 
 //Setting Environment
 const PORT = process.env.PORT || 5000;
