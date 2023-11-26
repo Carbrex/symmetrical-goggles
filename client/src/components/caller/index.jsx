@@ -7,6 +7,7 @@ const Caller = ({ socket }) => {
   const [remotePeerIdValue, setRemotePeerIdValue] = useState("");
   const [peerId, setPeerId] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [streamingToServer, setStreamingToServer] = useState(false); // [1
   const remoteAudioRef = useRef(null);
   const peerInstance = useRef(null);
   const localStreamRef = useRef(null);
@@ -35,22 +36,37 @@ const Caller = ({ socket }) => {
         .then((mediaStream) => {
           localStreamRef.current = mediaStream;
 
+          const options = {
+            mimeType: "audio/ogg; codecs=opus",
+            audioBitsPerSecond: 128000,
+            videoBitsPerSecond: 2500000,
+            bitsPerSecond: 2628000,
+          };
+
           mediaRecorderRef.current = new MediaRecorder(mediaStream);
+          const audioChunks = []; // Store audio chunks continuously
+
           mediaRecorderRef.current.ondataavailable = function (e) {
-            console.log("data available");
+            console.log("Data available");
+            console.log(e);
             if (e.data.size > 0) {
-              const audioChunks = [];
+              console.log("Sending audio chunk to server");
               audioChunks.push(e.data);
               const audioBlob = new Blob(audioChunks, {
                 type: "audio/ogg; codecs=opus",
               });
+              // console.log(audioChunks);
+              // console.log(audioBlob);
 
-              // Send the audio Blob to the server via Socket
+              // Send the audio Blob to the server via Socket in real-time
               socket.emit("audio", audioBlob, (response) => {
                 if (!response.success) {
                   toast.error(response.msg);
                 }
               });
+
+              // Clear the chunks after sending to avoid resending old data
+              audioChunks.length = 0;
             }
           };
 
@@ -86,32 +102,22 @@ const Caller = ({ socket }) => {
       console.error("Local media stream not available");
     }
   };
-  const startRecording = () => {
-    if (mediaRecorderRef.current && localStreamRef.current) {
-      //check if already recording
-      if (mediaRecorderRef.current.state === "recording") {
-        toast.error("Already recording");
-        return;
-      }
-      mediaRecorderRef.current.start();
-      setTimeout(() => {
-        // Stop recording after 5 seconds (adjust as needed)
-        console.log("Stopped recording");
-        mediaRecorderRef.current.stop();
-      }, 5000); // Change this value to the desired duration
-    } else {
-      toast.error("Please allow microphone access to continue.2");
+  const handleRecording = () => {
+    if (!mediaRecorderRef.current || !localStreamRef.current) {
+      toast.error("Please allow microphone access to continue.");
       console.error("Local media stream or MediaRecorder not available");
+      return;
     }
-  };
-  const sendStreamToServer = () => {
-    if (mediaRecorderRef.current && localStreamRef.current) {
+
+    if (mediaRecorderRef.current.state === "recording") {
+      mediaRecorderRef.current.stop();
+      console.log("Stopped recording");
+    } else {
+      mediaRecorderRef.current.start(1000);
       console.log("Sending stream to server");
-      startRecording();
-    } else {
-      toast.error("Please allow microphone access to continue.3");
-      console.error("Local media stream or MediaRecorder not available");
     }
+
+    setStreamingToServer(mediaRecorderRef.current.state === "recording");
   };
 
   socket.emit("hello", "hello from client", (response) => {
@@ -129,8 +135,8 @@ const Caller = ({ socket }) => {
       <button onClick={() => call(remotePeerIdValue)} disabled={buttonDisabled}>
         Call
       </button>
-      <button onClick={sendStreamToServer} disabled={buttonDisabled}>
-        Send Stream to Server
+      <button onClick={handleRecording} disabled={buttonDisabled}>
+        {streamingToServer ? "Stop Stream" : "Start Stream"}
       </button>
       <div>
         <audio ref={remoteAudioRef} controls />

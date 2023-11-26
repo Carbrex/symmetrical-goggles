@@ -11,7 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "@socket.io/admin-ui": "^0.5.1",
+    "audio-decode": "^2.2.0",
     "axios": "^1.5.1",
+    "blob": "^0.1.0",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
@@ -24,6 +26,7 @@
     "peer": "^1.0.1",
     "sentiment": "^5.0.2",
     "socket.io": "^4.7.2",
+    "speaker": "^0.5.4",
     "vosk": "^0.3.39"
   }
 }

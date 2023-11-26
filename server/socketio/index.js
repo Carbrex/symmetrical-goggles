@@ -1,23 +1,28 @@
-module.exports = (io) => {
-  function getActiveUsers(roomId) {
-    const room = io.sockets.adapter.rooms.get(roomId);
-    if (room) {
-      const users = [];
-      for (const socketId of room) {
-        const socket = io.sockets.sockets.get(socketId);
-        users.push(socket.userData);
-      }
-      return users;
-    } else {
-      return [];
-    }
-  }
+const Speaker = require("speaker");
+const { Readable } = require("stream");
+const fs = require("fs");
+const { Blob } = require("node:buffer");
 
+module.exports = (io) => {
   io.on("connection", (socket) => {
     console.log("A user connected");
+    // let audioData = [];
 
-    socket.on("audio", (data) => {
-      console.log(data);
+    socket.on("audio", async (audioBlob) => {
+      console.log(audioBlob);
+      const audioStream = new Readable();
+      audioStream.push(audioBlob);
+      audioStream.push(null);
+
+      // Create a Speaker instance to play the audio
+      const speaker = new Speaker({
+        channels: 2, // Assuming stereo audio
+        bitDepth: 16, // Assuming 16-bit audio
+        sampleRate: 44100, // Assuming a common sample rate
+      });
+
+      // Pipe the audio stream to the speaker
+      audioStream.pipe(speaker);
     });
     socket.on("hello", (data, cb) => {
       console.log(data);
@@ -31,6 +36,5 @@ module.exports = (io) => {
     socket.on("disconnect", () => {
       console.log("A user disconnected");
     });
-    socket.getActiveUsers = getActiveUsers;
   });
 };
