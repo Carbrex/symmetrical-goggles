@@ -18,9 +18,13 @@ const Caller = ({ socket, peerID = "" }) => {
 	const mediaRecorderRef = useRef(null);
 
 	const playAudio = (stream) => {
-		console.log("Playing audio from stream");
-		remoteAudioRef.current.srcObject = stream;
-		remoteAudioRef.current.play();
+		if (stream) {
+			console.log("Playing audio from stream");
+			remoteAudioRef.current.srcObject = stream;
+			remoteAudioRef.current.play();
+		} else {
+			console.log("No stream");
+		}
 	};
 
 	useEffect(() => {
