@@ -27,7 +27,7 @@ const Caller = ({ socket, peerID = "" }) => {
 			// "8" + Math.floor(Math.random() * 1000000000).toString(),
 			{
 				host: import.meta.env.DEV ? "localhost" : window.location.hostname,
-				port: import.meta.env.DEV ? 5000 : undefined,
+				port: import.meta.env.DEV ? 5000 : 10000,
 				path: "/call",
 			}
 		);
