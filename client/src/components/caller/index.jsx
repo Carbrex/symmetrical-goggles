@@ -8,10 +8,13 @@ import API_URL from "../../api/config";
 const Caller = ({ socket, peerID = "" }) => {
 	const [remotePeerIdValue, setRemotePeerIdValue] = useState(peerID);
 	const [buttonDisabled, setButtonDisabled] = useState(true);
-	const [streamingToServer, setStreamingToServer] = useState(false); // [1
-	const remoteAudioRef = useRef(null);
-	const peerInstance = useRef(null);
+	const [streamingToServer, setStreamingToServer] = useState(false);
+
 	const localStreamRef = useRef(null);
+	const remoteAudioRef = useRef(null);
+
+	const peerInstance = useRef(null);
+
 	const mediaRecorderRef = useRef(null);
 
 	const playAudio = (stream) => {
@@ -27,7 +30,7 @@ const Caller = ({ socket, peerID = "" }) => {
 			// "8" + Math.floor(Math.random() * 1000000000).toString(),
 			{
 				host: import.meta.env.DEV ? "localhost" : window.location.hostname,
-				port: import.meta.env.DEV ? 5000 : 443,
+				port: import.meta.env.DEV ? 443 : 443,
 				path: "/call",
 			}
 		);
@@ -72,9 +75,9 @@ const Caller = ({ socket, peerID = "" }) => {
 		});
 
 		peer.on("call", (call) => {
-			toast.info("Incoming call");
-			console.log("Incoming call");
 			console.log(call);
+			toast.info(`Incoming call from ${call.peer}`);
+			console.log(`Incoming call from ${call.peer}`);
 			call.answer(localStreamRef.current);
 			call.on("stream", playAudio);
 		});
@@ -121,12 +124,6 @@ const Caller = ({ socket, peerID = "" }) => {
 		setStreamingToServer(mediaRecorderRef.current.state === "recording");
 	};
 
-	setInterval(() => {
-		if (peerInstance.current.connected) {
-			console.log("connected");
-		}
-	}, 2000);
-
 	socket.emit("hello", "hello from client", (response) => {
 		console.log(response);
 	});
@@ -150,6 +147,7 @@ const Caller = ({ socket, peerID = "" }) => {
 				disabled={buttonDisabled}>
 				{streamingToServer ? "Stop Stream" : "Start Stream"}
 			</button>
+			<audio ref={remoteAudioRef} />
 		</div>
 	);
 };
