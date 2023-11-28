@@ -243,3 +243,23 @@
   level: 'info',
   timestamp: '2023-11-28T15:18:52.893Z'
 }
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:jOfXcVjDEikzV8PaAAAB, Data: "hello from client"',
+  timestamp: '2023-11-28T15:19:39.972Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:jOfXcVjDEikzV8PaAAAB, Data: "hello from client"',
+  timestamp: '2023-11-28T15:19:40.001Z'
+}
+{
+  message: 'peer client disconnected 8106164983',
+  level: 'info',
+  timestamp: '2023-11-28T15:19:48.332Z'
+}
+{
+  level: 'info',
+  message: 'Socket: User Disconnected, ID:jOfXcVjDEikzV8PaAAAB, Data: null',
+  timestamp: '2023-11-28T15:19:48.336Z'
+}
