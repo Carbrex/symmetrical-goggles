@@ -3,4 +3,6 @@ Dataset/*
 Models/*
 **node_modules
 server/Audio/*
+!server/Audio/.gitkeep
+./log/*
 ```

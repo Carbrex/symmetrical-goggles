@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Peer from "peerjs";
 import { toast } from "react-toastify";
 import Visualizer from "./Visualiser";
+import API_URL from "../../api/config";
 
 // give default value to peerID
 const Caller = ({ socket, peerID = "" }) => {
@@ -24,8 +25,8 @@ const Caller = ({ socket, peerID = "" }) => {
 			undefined,
 			// "8" + Math.floor(Math.random() * 1000000000).toString(),
 			{
-				host: "localhost",
-				port: 5000,
+				host: import.meta.env.DEV ? "localhost" : window.location.hostname,
+				port: import.meta.env.DEV ? 5000 : undefined,
 				path: "/call",
 			}
 		);
