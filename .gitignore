@@ -2,4 +2,5 @@
 Dataset/*
 Models/*
 **node_modules
+server/Audio/*
 ```

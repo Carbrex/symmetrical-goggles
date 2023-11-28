@@ -1,40 +1,67 @@
-const Speaker = require("speaker");
-const { Readable } = require("stream");
 const fs = require("fs");
-const { Blob } = require("node:buffer");
+const logger = require("../utils/logger");
+
+const removeEmptyAudioFiles = require("../utils/removeAudioFiles");
+const { log } = require("console");
+removeEmptyAudioFiles();
 
 module.exports = (io) => {
-  io.on("connection", (socket) => {
-    console.log("A user connected");
-    // let audioData = [];
+	io.on("connection", (socket) => {
+		logger.socket("User Connected", socket.id);
 
-    socket.on("audio", async (audioBlob) => {
-      console.log(audioBlob);
-      const audioStream = new Readable();
-      audioStream.push(audioBlob);
-      audioStream.push(null);
+		socket.emit("connection", { customerNo: "23223232" });
 
-      // Create a Speaker instance to play the audio
-      const speaker = new Speaker({
-        channels: 2, // Assuming stereo audio
-        bitDepth: 16, // Assuming 16-bit audio
-        sampleRate: 44100, // Assuming a common sample rate
-      });
+		const file = fs.createWriteStream(
+			"./Audio/" + socket.id.toString() + ".webm",
+			{
+				flags: "a",
+			}
+		);
 
-      // Pipe the audio stream to the speaker
-      audioStream.pipe(speaker);
-    });
-    socket.on("hello", (data, cb) => {
-      console.log(data);
-      cb("hello from server");
-    });
+		socket.on("audio", (bufferArray, cb) => {
+			logger.socket(
+				"audio received ",
+				socket.id,
+				bufferArray.length + " bytes"
+			);
 
-    // socket.on("room:join", (data, cb) => joinRoom(data, cb, socket));
-    // socket.on("room:leave", (data, cb) => leaveRoom(data, cb, socket));
-    // socket.on("onEmotion", (data, cb) => leaveRoom(data, cb, socket));
+			try {
+				// console.log("Received audio data: " + bufferArray.length + " bytes");
+				file.write(bufferArray);
+				cb({ success: true, msg: "audio received" });
+			} catch (err) {
+				console.log(err);
+				logger.error(err);
+				cb({ success: false, msg: "error" });
+			}
+		});
 
-    socket.on("disconnect", () => {
-      console.log("A user disconnected");
-    });
-  });
+		socket.on("hello", (data, cb) => {
+			logger.socket("hello received ", socket.id, data);
+			cb("hello from server");
+		});
+
+		socket.on("disconnect", () => {
+			//if file empty delete file
+			fs.stat("./Audio/" + socket.id.toString() + ".webm", (err, stats) => {
+				if (err) {
+					console.error(err);
+					return;
+				}
+				if (stats.size == 0) {
+					fs.unlink("./Audio/" + socket.id.toString() + ".webm", (err) => {
+						if (err) {
+							console.error(err);
+							logger.error(err);
+
+							return;
+						}
+						//file removed
+					});
+				}
+			});
+			file.end();
+			logger.socket("User Disconnected", socket.id);
+		});
+	});
 };
