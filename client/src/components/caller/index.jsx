@@ -27,7 +27,7 @@ const Caller = ({ socket, peerID = "" }) => {
 			// "8" + Math.floor(Math.random() * 1000000000).toString(),
 			{
 				host: import.meta.env.DEV ? "localhost" : window.location.hostname,
-				port: import.meta.env.DEV ? 5000 : 10000,
+				port: import.meta.env.DEV ? 5000 : 443,
 				path: "/call",
 			}
 		);
@@ -120,6 +120,12 @@ const Caller = ({ socket, peerID = "" }) => {
 
 		setStreamingToServer(mediaRecorderRef.current.state === "recording");
 	};
+
+	setInterval(() => {
+		if (peerInstance.current.connected) {
+			console.log("connected");
+		}
+	}, 2000);
 
 	socket.emit("hello", "hello from client", (response) => {
 		console.log(response);

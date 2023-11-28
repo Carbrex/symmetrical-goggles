@@ -3,12 +3,12 @@ const logger = require("../utils/logger");
 
 const removeEmptyAudioFiles = require("../utils/removeAudioFiles");
 const { log } = require("console");
-removeEmptyAudioFiles();
 
 const audioDir = "./Audio";
 if (!fs.existsSync(audioDir)) {
 	fs.mkdirSync(audioDir);
 }
+removeEmptyAudioFiles();
 
 module.exports = (io) => {
 	io.on("connection", (socket) => {

@@ -338,3 +338,363 @@
   level: 'info',
   timestamp: '2023-11-28T15:33:16.350Z'
 }
+{
+  level: 'info',
+  message: 'Socket: User Connected, ID:rhCG1BPlZFGUIhS0AAAB, Data: null',
+  timestamp: '2023-11-28T15:43:02.907Z'
+}
+{
+  message: 'Removed empty file: rhCG1BPlZFGUIhS0AAAB.webm',
+  level: 'info',
+  timestamp: '2023-11-28T15:43:30.561Z'
+}
+{
+  level: 'info',
+  message: 'Socket: User Connected, ID:plcPlzG79v6GbbvJAAAB, Data: null',
+  timestamp: '2023-11-28T15:43:32.080Z'
+}
+{
+  level: 'info',
+  message: 'Socket: User Connected, ID:TDeejRrv-ZNc_WwcAAAB, Data: null',
+  timestamp: '2023-11-28T15:43:36.510Z'
+}
+{
+  message: 'Removed empty file: TDeejRrv-ZNc_WwcAAAB.webm',
+  level: 'info',
+  timestamp: '2023-11-28T15:43:42.579Z'
+}
+{
+  level: 'info',
+  message: 'Socket: User Connected, ID:alFtwnld1Da6wpXiAAAB, Data: null',
+  timestamp: '2023-11-28T15:43:43.990Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:alFtwnld1Da6wpXiAAAB, Data: "hello from client"',
+  timestamp: '2023-11-28T15:43:44.014Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:alFtwnld1Da6wpXiAAAB, Data: "hello from client"',
+  timestamp: '2023-11-28T15:43:44.045Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:alFtwnld1Da6wpXiAAAB, Data: "hello from client"',
+  timestamp: '2023-11-28T15:44:15.047Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:alFtwnld1Da6wpXiAAAB, Data: "hello from client"',
+  timestamp: '2023-11-28T15:44:15.071Z'
+}
+{
+  message: 'peer client connected 8423909497',
+  level: 'info',
+  timestamp: '2023-11-28T15:44:15.086Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:alFtwnld1Da6wpXiAAAB, Data: "hello from client"',
+  timestamp: '2023-11-28T15:44:52.507Z'
+}
+{
+  message: 'peer client disconnected 8423909497',
+  level: 'info',
+  timestamp: '2023-11-28T15:44:52.520Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:alFtwnld1Da6wpXiAAAB, Data: "hello from client"',
+  timestamp: '2023-11-28T15:44:52.540Z'
+}
+{
+  level: 'info',
+  message: 'Socket: User Disconnected, ID:alFtwnld1Da6wpXiAAAB, Data: null',
+  timestamp: '2023-11-28T15:44:52.591Z'
+}
+{
+  message: 'peer client connected 8115233780',
+  level: 'info',
+  timestamp: '2023-11-28T15:44:52.595Z'
+}
+{
+  level: 'info',
+  message: 'Socket: User Connected, ID:ydPrRHxfcgaGI1j0AAAE, Data: null',
+  timestamp: '2023-11-28T15:44:55.514Z'
+}
+{
+  message: 'peer client connected 8385682711',
+  level: 'info',
+  timestamp: '2023-11-28T15:44:55.527Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:ydPrRHxfcgaGI1j0AAAE, Data: "hello from client"',
+  timestamp: '2023-11-28T15:44:55.538Z'
+}
+{
+  message: 'peer client connected 8328396221',
+  level: 'info',
+  timestamp: '2023-11-28T15:44:55.544Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:ydPrRHxfcgaGI1j0AAAE, Data: "hello from client"',
+  timestamp: '2023-11-28T15:44:55.551Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:ydPrRHxfcgaGI1j0AAAE, Data: "hello from client"',
+  timestamp: '2023-11-28T15:44:55.552Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:ydPrRHxfcgaGI1j0AAAE, Data: "hello from client"',
+  timestamp: '2023-11-28T15:44:55.552Z'
+}
+{
+  message: 'peer client disconnected 8328396221',
+  level: 'info',
+  timestamp: '2023-11-28T15:45:09.501Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:ydPrRHxfcgaGI1j0AAAE, Data: "hello from client"',
+  timestamp: '2023-11-28T15:45:09.506Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:ydPrRHxfcgaGI1j0AAAE, Data: "hello from client"',
+  timestamp: '2023-11-28T15:45:09.531Z'
+}
+{
+  message: 'peer client connected 8637537429',
+  level: 'info',
+  timestamp: '2023-11-28T15:45:09.543Z'
+}
+{
+  message: 'peer client disconnected 8637537429',
+  level: 'info',
+  timestamp: '2023-11-28T15:45:24.212Z'
+}
+{
+  level: 'info',
+  message: 'Socket: User Disconnected, ID:ydPrRHxfcgaGI1j0AAAE, Data: null',
+  timestamp: '2023-11-28T15:45:24.215Z'
+}
+{
+  level: 'info',
+  message: 'Socket: User Connected, ID:RnKcjau2yUVCXfb_AAAH, Data: null',
+  timestamp: '2023-11-28T15:45:27.934Z'
+}
+{
+  message: 'peer client connected 8906077035',
+  level: 'info',
+  timestamp: '2023-11-28T15:45:27.936Z'
+}
+{
+  message: 'peer client connected 8309680824',
+  level: 'info',
+  timestamp: '2023-11-28T15:45:27.953Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:RnKcjau2yUVCXfb_AAAH, Data: "hello from client"',
+  timestamp: '2023-11-28T15:45:27.961Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:RnKcjau2yUVCXfb_AAAH, Data: "hello from client"',
+  timestamp: '2023-11-28T15:45:28.012Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:RnKcjau2yUVCXfb_AAAH, Data: "hello from client"',
+  timestamp: '2023-11-28T15:45:28.013Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:RnKcjau2yUVCXfb_AAAH, Data: "hello from client"',
+  timestamp: '2023-11-28T15:45:28.013Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:RnKcjau2yUVCXfb_AAAH, Data: "hello from client"',
+  timestamp: '2023-11-28T15:45:40.687Z'
+}
+{
+  message: 'peer client disconnected 8309680824',
+  level: 'info',
+  timestamp: '2023-11-28T15:45:40.694Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:RnKcjau2yUVCXfb_AAAH, Data: "hello from client"',
+  timestamp: '2023-11-28T15:45:40.701Z'
+}
+{
+  message: 'peer client connected 8209386421',
+  level: 'info',
+  timestamp: '2023-11-28T15:45:40.714Z'
+}
+{
+  message: 'peer client disconnected 8209386421',
+  level: 'info',
+  timestamp: '2023-11-28T15:45:42.968Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:RnKcjau2yUVCXfb_AAAH, Data: "hello from client"',
+  timestamp: '2023-11-28T15:45:42.970Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:RnKcjau2yUVCXfb_AAAH, Data: "hello from client"',
+  timestamp: '2023-11-28T15:45:42.987Z'
+}
+{
+  message: 'peer client connected 8116123843',
+  level: 'info',
+  timestamp: '2023-11-28T15:45:43.004Z'
+}
+{
+  message: 'peer client disconnected 8116123843',
+  level: 'info',
+  timestamp: '2023-11-28T15:45:46.811Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:RnKcjau2yUVCXfb_AAAH, Data: "hello from client"',
+  timestamp: '2023-11-28T15:45:46.814Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:RnKcjau2yUVCXfb_AAAH, Data: "hello from client"',
+  timestamp: '2023-11-28T15:45:46.843Z'
+}
+{
+  message: 'peer client connected 8907966584',
+  level: 'info',
+  timestamp: '2023-11-28T15:45:46.855Z'
+}
+{
+  level: 'info',
+  message: 'Socket: User Disconnected, ID:RnKcjau2yUVCXfb_AAAH, Data: null',
+  timestamp: '2023-11-28T15:45:54.139Z'
+}
+{
+  message: 'peer client disconnected 8385682711',
+  level: 'info',
+  timestamp: '2023-11-28T15:45:54.141Z'
+}
+{
+  message: 'peer client disconnected 8907966584',
+  level: 'info',
+  timestamp: '2023-11-28T15:45:54.141Z'
+}
+{
+  message: 'peer client disconnected 8115233780',
+  level: 'info',
+  timestamp: '2023-11-28T15:45:54.142Z'
+}
+{
+  message: 'peer client disconnected 8906077035',
+  level: 'info',
+  timestamp: '2023-11-28T15:45:54.142Z'
+}
+{
+  level: 'info',
+  message: 'Socket: User Connected, ID:Otik00P8-6dO4K27AAAK, Data: null',
+  timestamp: '2023-11-28T15:45:55.540Z'
+}
+{
+  message: 'peer client connected 8618393709',
+  level: 'info',
+  timestamp: '2023-11-28T15:45:55.572Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:Otik00P8-6dO4K27AAAK, Data: "hello from client"',
+  timestamp: '2023-11-28T15:45:55.604Z'
+}
+{
+  message: 'peer client connected 8928570342',
+  level: 'info',
+  timestamp: '2023-11-28T15:45:55.608Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:Otik00P8-6dO4K27AAAK, Data: "hello from client"',
+  timestamp: '2023-11-28T15:45:55.623Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:Otik00P8-6dO4K27AAAK, Data: "hello from client"',
+  timestamp: '2023-11-28T15:45:55.623Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:Otik00P8-6dO4K27AAAK, Data: "hello from client"',
+  timestamp: '2023-11-28T15:45:55.623Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:Otik00P8-6dO4K27AAAK, Data: "hello from client"',
+  timestamp: '2023-11-28T15:45:57.536Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:Otik00P8-6dO4K27AAAK, Data: "hello from client"',
+  timestamp: '2023-11-28T15:45:57.619Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:Otik00P8-6dO4K27AAAK, Data: "hello from client"',
+  timestamp: '2023-11-28T15:46:30.334Z'
+}
+{
+  message: 'peer client disconnected 8928570342',
+  level: 'info',
+  timestamp: '2023-11-28T15:46:30.343Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:Otik00P8-6dO4K27AAAK, Data: "hello from client"',
+  timestamp: '2023-11-28T15:46:30.364Z'
+}
+{
+  message: 'peer client connected 852275597',
+  level: 'info',
+  timestamp: '2023-11-28T15:46:30.405Z'
+}
+{
+  message: 'peer client disconnected 852275597',
+  level: 'info',
+  timestamp: '2023-11-28T15:46:30.451Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:Otik00P8-6dO4K27AAAK, Data: "hello from client"',
+  timestamp: '2023-11-28T15:46:30.455Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:Otik00P8-6dO4K27AAAK, Data: "hello from client"',
+  timestamp: '2023-11-28T15:46:30.475Z'
+}
+{
+  message: 'peer client connected 8271115380',
+  level: 'info',
+  timestamp: '2023-11-28T15:46:30.520Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:Otik00P8-6dO4K27AAAK, Data: "hello from client"',
+  timestamp: '2023-11-28T15:46:31.431Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:Otik00P8-6dO4K27AAAK, Data: "hello from client"',
+  timestamp: '2023-11-28T15:46:31.619Z'
+}
