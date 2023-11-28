@@ -168,3 +168,78 @@
   level: 'info',
   timestamp: '2023-11-28T14:40:12.129Z'
 }
+{
+  message: 'Removed empty file: 2oy9dUbEumzOWfAGAAAO.webm',
+  level: 'info',
+  timestamp: '2023-11-28T15:16:55.196Z'
+}
+{
+  level: 'info',
+  message: 'Socket: User Connected, ID:jOfXcVjDEikzV8PaAAAB, Data: null',
+  timestamp: '2023-11-28T15:16:57.216Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:jOfXcVjDEikzV8PaAAAB, Data: "hello from client"',
+  timestamp: '2023-11-28T15:18:46.403Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:jOfXcVjDEikzV8PaAAAB, Data: "hello from client"',
+  timestamp: '2023-11-28T15:18:46.435Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:jOfXcVjDEikzV8PaAAAB, Data: "hello from client"',
+  timestamp: '2023-11-28T15:18:46.437Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:jOfXcVjDEikzV8PaAAAB, Data: "hello from client"',
+  timestamp: '2023-11-28T15:18:46.438Z'
+}
+{
+  message: 'peer client connected 8468804317',
+  level: 'info',
+  timestamp: '2023-11-28T15:18:46.450Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:jOfXcVjDEikzV8PaAAAB, Data: "hello from client"',
+  timestamp: '2023-11-28T15:18:50.937Z'
+}
+{
+  message: 'peer client disconnected 8468804317',
+  level: 'info',
+  timestamp: '2023-11-28T15:18:50.939Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:jOfXcVjDEikzV8PaAAAB, Data: "hello from client"',
+  timestamp: '2023-11-28T15:18:50.951Z'
+}
+{
+  message: 'peer client connected 852616492',
+  level: 'info',
+  timestamp: '2023-11-28T15:18:50.958Z'
+}
+{
+  message: 'peer client disconnected 852616492',
+  level: 'info',
+  timestamp: '2023-11-28T15:18:52.836Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:jOfXcVjDEikzV8PaAAAB, Data: "hello from client"',
+  timestamp: '2023-11-28T15:18:52.838Z'
+}
+{
+  level: 'info',
+  message: 'Socket: hello received , ID:jOfXcVjDEikzV8PaAAAB, Data: "hello from client"',
+  timestamp: '2023-11-28T15:18:52.855Z'
+}
+{
+  message: 'peer client connected 8106164983',
+  level: 'info',
+  timestamp: '2023-11-28T15:18:52.893Z'
+}
