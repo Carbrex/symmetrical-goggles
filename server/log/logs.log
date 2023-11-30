@@ -27558,3 +27558,13 @@
   message: 'Socket: User Disconnected, ID:jte3ectELknNXP4RAAAY, Data: null',
   timestamp: '2023-11-30T22:08:10.022Z'
 }
+{
+  level: 'info',
+  message: 'Socket: User Disconnected, ID:t7GK_CupqMkAimV8AAAD, Data: null',
+  timestamp: '2023-11-30T22:10:38.379Z'
+}
+{
+  level: 'info',
+  message: 'Socket: User Connected, ID:blWa7zduvytZR17iAAAg, Data: null',
+  timestamp: '2023-11-30T22:11:20.148Z'
+}
