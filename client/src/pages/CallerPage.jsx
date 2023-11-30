@@ -1,47 +1,14 @@
+import { Card, Stack, Button, Container, Typography } from "@mui/material";
+import Socket, { socket } from "../components/socket";
 import { Helmet } from "react-helmet-async";
-import { filter } from "lodash";
-import { sentenceCase } from "change-case";
 import { useState, useEffect } from "react";
-import { socket } from "../socket";
-// import micGif from 'https://gifer.com/en/44zG';
-import micGif from "../../public/assets/images/mic-gif2.gif";
+import Caller from "../components/caller";
+
 import angryFace from "../../public/assets/images/angry-face.svg";
 import sadFace from "../../public/assets/images/disappointed-face.svg";
 import neutralFace from "../../public/assets/images/neutral-face.svg";
 import disgustFace from "../../public/assets/images/woozy-face.svg";
 import happyFace from "../../public/assets/images/grinning-face.svg";
-import Caller from "../components/caller";
-
-// @mui
-import {
-	Card,
-	Box,
-	Table,
-	Stack,
-	Paper,
-	Avatar,
-	Button,
-	Popover,
-	Checkbox,
-	TableRow,
-	MenuItem,
-	TableBody,
-	TableCell,
-	Container,
-	Typography,
-	IconButton,
-	TableContainer,
-	TablePagination,
-} from "@mui/material";
-// components
-import Label from "../components/label";
-import Iconify from "../components/iconify";
-import Scrollbar from "../components/scrollbar";
-// sections
-import { UserListHead, UserListToolbar } from "../sections/@dashboard/user";
-// mock
-import USERLIST from "../_mock/user";
-import { GifBox } from "@mui/icons-material";
 
 // ----------------------------------------------------------------------
 
@@ -58,44 +25,26 @@ const EMOJI_MAP = {
 // ----------------------------------------------------------------------
 
 export default function UserPage() {
-	const [open, setOpen] = useState(null);
-	const [isRecording, setIsRecording] = useState(false);
-	// const [loadingMood, setLoadingMood] = useState(true);
+	const [readtToTakeCall, setReadtToTakeCall] = useState(true);
 	const [mood, setMood] = useState("happy");
+	const [selectedValue, setSelectedValue] = useState(null);
 
 	useEffect(() => {
-		// console.log(socket);
-		function onConnect() {
-			console.log("Socket Connected");
-			if (socket.connected === true) {
-				socket.emit("emotion");
-			}
-		}
-
-		function onDisconnect() {
-			console.log("disconnected");
-		}
-
-		// function onEmotion(value) {
-		// 	console.log("onEmotion", value);
-		// 	// setMood(value);
-		// }
-
-		socket.on("connect", onConnect);
-		socket.on("disconnect", onDisconnect);
 		// socket.on("emotion", onEmotion);
-		socket.connect();
 
 		return () => {
-			socket.off("connect", onConnect);
-			socket.off("disconnect", onDisconnect);
 			// socket.off("emotion", onEmotion);
-			socket.disconnect();
 		};
 	}, []);
 
+	const handleFeedback = (value) => {
+		setSelectedValue(value);
+		console.log("Selected:", value);
+	};
+
 	return (
 		<>
+			<Socket />
 			<Helmet>
 				<title> User | Minimal UI </title>
 			</Helmet>
@@ -112,99 +61,98 @@ export default function UserPage() {
 						sx={{ color: "white" }}>
 						User
 					</Typography>
-					{/* <Button
-            variant="contained"
-            startIcon={<Iconify icon="eva:plus-fill" />}
-          >
-            New User
-          </Button> */}
 				</Stack>
 
-				<Card>
-					<div
+				<Card
+					style={{
+						display: "flex",
+						alignItems: "center",
+						flexDirection: "column",
+						padding: "25px",
+						minHeight: "50vh",
+						gap: "20px",
+					}}>
+					<Button
+						variant='contained'
 						style={{
-							display: "flex",
-							alignItems: "center",
-							justifyContent: "center",
-							flexDirection: "column",
-							padding: "10px",
-							//   height: "50vh",
+							margin: "20px",
+							display: "block",
+							width: "fit-content",
+						}}
+						onClick={() => {
+							setReadtToTakeCall(!readtToTakeCall);
 						}}>
-						<Button
-							variant='contained'
-							style={{ margin: "20px" }}
-							onClick={() => {
-								setIsRecording(!isRecording);
-							}}
-							// startIcon={<Iconify icon="eva:plus-fill" />}
-						>
-							{isRecording ? "End" : "Start"} Call
-						</Button>
+						{readtToTakeCall ? "Need a Break" : "Ready to take calls"}
+					</Button>
 
-						{isRecording && (
-							<>
+					{readtToTakeCall && (
+						<>
+							<div
+								style={{
+									display: "flex",
+									width: "100%",
+									padding: "0px 20px",
+									gap: "50px",
+									// justifyContent: "space-between",
+								}}>
+								<div style={{ minWidth: "75%" }}>
+									<Caller
+										socket={socket}
+										showDialer={false}
+									/>
+								</div>
 								<div
 									style={{
 										display: "flex",
 										alignItems: "center",
-										justifyContent: "space-around",
-										flexDirection: "row",
-										width: "100%",
+										justifyContent: "center",
+										flexDirection: "column",
+										maxWidth: "200px",
+										// border: "2px solid black",
 									}}>
+									<h3>Predicted Sentiment</h3>
 									<img
-										src={micGif}
-										alt='mic'
+										src={EMOJI_ARR[EMOJI_MAP[mood]]}
+										alt='sentiment'
 										style={{
-											height: "15vw",
-											width: "18vw",
-											borderRadius: "3%",
+											objectFit: "contain",
 										}}
 									/>
-									<div
-										style={{
-											display: "flex",
-											alignItems: "center",
-											justifyContent: "center",
-											flexDirection: "column",
-										}}>
-										<h3>Current Sentiments</h3>
-										<img
-											src={EMOJI_ARR[EMOJI_MAP[mood]]}
-											alt='sentiment'
-											style={{
-												width: "20vw",
-												height: "10vw",
-												objectFit: "contain",
-											}}
-										/>
-									</div>
 								</div>
-								<div>
-									<h3>Are the sentiments given by the model correct</h3>
-									<select
-										style={{
-											backgroundColor: "#f7fafc" /* bg-gray-50 */,
-											border: "1px solid #e5e7eb" /* border border-gray-300 */,
-											color: "#111827" /* text-gray-900 */,
-											fontSize: "0.875rem" /* text-sm */,
-											borderRadius: "0.375rem" /* rounded-lg */,
-											display: "block" /* block */,
-											width: "100%" /* w-full */,
-											padding: "0.625rem" /* p-2.5 */,
-										}}
-										name=''
-										id=''>
-										<option value=''>Feedback</option>
-										<option value=''>Yes</option>
-										<option value=''>No</option>
-									</select>
-								</div>
-							</>
-						)}
-						<div style={{ border: "2px solid black", padding: "20px" }}>
-							<Caller socket={socket} />
-						</div>
-					</div>
+							</div>
+							<div
+								style={{
+									display: "flex",
+									alignItems: "center",
+									justifyContent: "center",
+									gap: "20px",
+									border: "1px solid black",
+									padding: "10px",
+									minWidth: "50%",
+									borderRadius: "10px",
+								}}>
+								<h3 style={{ margin: "0px" }}>Are sentiments correct</h3>
+								<label>
+									<input
+										type='checkbox'
+										checked={selectedValue === "yes"}
+										onChange={() => handleFeedback("yes")}
+										disabled={selectedValue !== null}
+									/>{" "}
+									Yes
+								</label>
+								<label>
+									<input
+										type='checkbox'
+										checked={selectedValue === "no"}
+										disabled={selectedValue !== null}
+										onChange={() => handleFeedback("no")}
+									/>{" "}
+									No
+								</label>
+							</div>
+						</>
+					)}
 				</Card>
 			</Container>
 		</>

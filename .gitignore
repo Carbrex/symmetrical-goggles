@@ -5,4 +5,5 @@ Models/*
 server/Audio/*
 !server/Audio/.gitkeep
 server/log/*
+server/certficiate
 ```

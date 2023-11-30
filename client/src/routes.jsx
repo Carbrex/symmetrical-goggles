@@ -7,7 +7,7 @@ import BlogPage from "./pages/BlogPage";
 import UserPage from "./pages/UserPage";
 import LoginPage from "./pages/LoginPage";
 import CallerPage from "./pages/CallerPage";
-import Coustmer from "./pages/Coustmer";
+import Coustmer from "./pages/CoustmerPage";
 import Page404 from "./pages/Page404";
 import ProductsPage from "./pages/ProductsPage";
 import DashboardAppPage from "./pages/DashboardAppPage";

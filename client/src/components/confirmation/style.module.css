@@ -1,0 +1,21 @@
+.btn {
+	cursor: pointer;
+	border-radius: 8px;
+	border: 0.2vw solid black;
+	padding: 0.2vh 0.2vw;
+	margin-right: 5px;
+	transition: all 0.4s;
+
+	&:disabled {
+		cursor: not-allowed;
+	}
+	&:focus {
+		outline: none;
+	}
+	background-color: black;
+	color: white;
+}
+
+.btn:hover {
+	background-color: darken(black, 10%);
+}

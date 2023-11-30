@@ -12,9 +12,16 @@ require("dotenv").config();
 
 const connectDB = require("./db/connect");
 
+// HTTPs Certificates
+var options = {
+	key: fs.readFileSync("certficiate/key.pem"),
+	cert: fs.readFileSync("certficiate/cert.crt"),
+};
+
 //Start Express App
 const app = express();
-const server = http.createServer(app);
+const server = http.createServer(options, app);
+// const server = http.createServer(app);
 
 //scoket.io
 const io = require("socket.io")(server, {
