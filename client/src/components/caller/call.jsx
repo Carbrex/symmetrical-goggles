@@ -10,6 +10,7 @@ const Call = ({ peer, socket, callTo = null, sendToServer }) => {
 	const [remoteStream, setRemoteStream] = useState(null);
 
 	const mediaRecorderRef = useRef(null);
+	const audioRef = useRef(null);
 	const callRef = useRef(null);
 
 	const setMediaRecorder = (stream) => {
@@ -58,6 +59,8 @@ const Call = ({ peer, socket, callTo = null, sendToServer }) => {
 	const playAudio = (stream) => {
 		if (stream) {
 			console.log("Playing audio from stream");
+			audioRef.current.srcObject = stream;
+			audioRef.current.play();
 			setRemoteStream(stream);
 		} else {
 			console.log("No stream");
@@ -151,15 +154,17 @@ const Call = ({ peer, socket, callTo = null, sendToServer }) => {
 
 		setStreamingToServer(mediaRecorderRef.current.state === "recording");
 	};
+	const createObjectURL = (stream) => {
+		return URL.createObjectURL(stream);
+	};
 
 	return (
 		<>
 			<Visualizer
 				localStream={localStream}
-				// remoteStream={localStreamRef.current}
 				remoteStream={remoteStream}
 			/>
-			{remoteStream && <audio src={remoteStream} />}
+			<audio ref={audioRef} />
 		</>
 	);
 };
