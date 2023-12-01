@@ -11,14 +11,13 @@ const Caller = ({ socket, callTo = null, showDialer = true }) => {
 	const [streamToServer, setStreamToServer] = useState(false);
 
 	const [peerInstance, setPeerInstance] = useState(null);
-	console.log("callTo", callTo);
-	console.log("remotePeerIdValue", remotePeerIdValue);
 
 	useEffect(() => {
 		const peer = new Peer(undefined, {
 			host: import.meta.env.DEV ? "localhost" : window.location.hostname,
 			port: 443,
 			path: "/call",
+			secure: true,
 		});
 
 		peer.on("open", (id) => {

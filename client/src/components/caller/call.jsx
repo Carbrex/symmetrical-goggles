@@ -17,16 +17,11 @@ const Call = ({ peer, socket, callTo = null, closeCall, sendToServer }) => {
 
 	const hangUpCall = () => {
 		console.log("Hanging up call");
-		// setLocalStream(null); // Clear local stream
+		toast.dismiss("call");
+		toast.info("Call ended", { toastId: "call" });
 		setRemoteStream(null); // Clear remote stream
 		setIsCallActive(false); // Update call status
 		closeCall();
-		// if (callRef.current) {
-		// 	callRef.current.close(); // Close the call
-		// 	setLocalStream(null); // Clear local stream
-		// 	setRemoteStream(null); // Clear remote stream
-		// 	setIsCallActive(false); // Update call status
-		// }
 	};
 
 	const setMediaRecorder = (stream) => {
@@ -86,7 +81,7 @@ const Call = ({ peer, socket, callTo = null, closeCall, sendToServer }) => {
 	const call = async (remotePeerId) => {
 		console.log("Calling peer " + remotePeerId);
 		toast.info("Calling peer " + remotePeerId + "...", {
-			toastId: "calling",
+			toastId: "call",
 			autoClose: false,
 		});
 		askPermissionForMic()
@@ -97,9 +92,14 @@ const Call = ({ peer, socket, callTo = null, closeCall, sendToServer }) => {
 						console.error("Peer not initialized");
 						return;
 					}
+					console.log(remotePeerId);
 					callRef.current = peer.call(remotePeerId, mediaStream);
 					callRef.current.on("stream", (stream) => {
-						toast.dismiss("calling");
+						toast.dismiss("call");
+						toast.success("On Call with", {
+							toastId: "call",
+							autoClose: false,
+						});
 						playAudio(stream);
 						setIsCallActive(true);
 					});
@@ -109,7 +109,8 @@ const Call = ({ peer, socket, callTo = null, closeCall, sendToServer }) => {
 				}
 			})
 			.catch((err) => {
-				toast.dismiss("calling");
+				toast.dismiss("call");
+				call.close();
 				console.log(err);
 			});
 	};
@@ -124,17 +125,20 @@ const Call = ({ peer, socket, callTo = null, closeCall, sendToServer }) => {
 						call.answer(mediaStream);
 						call.on("stream", playAudio);
 						call.on("close", hangUpCall);
+						toast.success("On Call with" + remotePeerId, { toastId: "call" });
 						callRef.current = call;
 						setIsCallActive(true);
 					})
 					.catch((err) => {
+						toast.dismiss("call");
+						call.close();
 						console.log(err);
 					});
 			},
 			onCancel: () => {
 				call.close();
 			},
-			toastId: "callFrom",
+			toastId: "call",
 		});
 	};
 

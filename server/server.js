@@ -1,7 +1,7 @@
 //Express App Imports
 const express = require("express");
 const path = require("path");
-const http = require("http");
+const http = require("https");
 const fs = require("fs");
 const favicon = require("serve-favicon");
 
@@ -13,15 +13,15 @@ require("dotenv").config();
 const connectDB = require("./db/connect");
 
 // HTTPs Certificates
-// var options = {
-// 	key: fs.readFileSync("certficiate/key.pem"),
-// 	cert: fs.readFileSync("certficiate/cert.crt"),
-// };
+const options = {
+	key: fs.readFileSync("certficiate/key.pem"),
+	cert: fs.readFileSync("certficiate/cert.crt"),
+};
 
 //Start Express App
 const app = express();
-// const server = http.createServer(options, app);
-const server = http.createServer(app);
+const server = http.createServer(options, app);
+// const server = http.createServer(app);
 
 //scoket.io
 const io = require("socket.io")(server, {
