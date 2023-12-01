@@ -98,7 +98,7 @@ export default function UserPage() {
 								<div style={{ minWidth: "75%" }}>
 									<Caller
 										socket={socket}
-										showDialer={false}
+										isCaller={true}
 									/>
 								</div>
 								<div

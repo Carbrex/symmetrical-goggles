@@ -8,7 +8,7 @@ export default function Socket() {
 		};
 
 		const onDisconnect = () => {
-			console.log("disconnected");
+			console.log("Socket Disconnected");
 		};
 
 		socket.on("connect", onConnect);
@@ -16,8 +16,6 @@ export default function Socket() {
 		socket.connect();
 
 		return () => {
-			socket.off("connect", onConnect);
-			socket.off("disconnect", onDisconnect);
 			socket.disconnect();
 		};
 	}, []);

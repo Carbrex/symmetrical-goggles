@@ -12,12 +12,12 @@ export default function UserPage() {
 
 	useEffect(() => {
 		socket.emit("getCoustomerNo", null, (data) => {
-			console.log("customer no", data);
+			// console.log("customer no", data);
 			setCosutomerNo(data.customerNo);
 		});
 
 		return () => {
-			console.log("unmounting");
+			// console.log("unmounting");
 		};
 	}, []);
 	const handleCallButton = () => {

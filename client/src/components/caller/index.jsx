@@ -1,14 +1,13 @@
-import { useEffect, useRef, useState } from "react";
-import Peer from "peerjs";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import Call from "./call";
 import { Button } from "@mui/material";
-import { set } from "lodash";
+import Peer from "peerjs";
+import Call from "./call";
 
 // give default value to peerID
-const Caller = ({ socket, callTo = null, showDialer = true }) => {
+const Caller = ({ socket, callTo = null, isCaller = false }) => {
 	const [remotePeerIdValue, setRemotePeerIdValue] = useState(null);
-	const [streamToServer, setStreamToServer] = useState(false);
+	// const [streamToServer, setStreamToServer] = useState(false);
 
 	const [peerInstance, setPeerInstance] = useState(null);
 
@@ -22,6 +21,7 @@ const Caller = ({ socket, callTo = null, showDialer = true }) => {
 
 		peer.on("open", (id) => {
 			console.log("My peer ID is: " + id);
+			setPeerInstance(peer);
 		});
 
 		peer.on("error", (err) => {
@@ -29,7 +29,6 @@ const Caller = ({ socket, callTo = null, showDialer = true }) => {
 			toast.error(err.message);
 		});
 
-		setPeerInstance(peer);
 		return () => {
 			peer.disconnect();
 			peer.destroy();
@@ -43,6 +42,8 @@ const Caller = ({ socket, callTo = null, showDialer = true }) => {
 	const onCallClick = (remoteId) => {
 		setRemotePeerIdValue(remoteId);
 	};
+	const showDialer = isCaller ? false : true;
+	const streamToServer = isCaller ? true : false;
 
 	return (
 		<div>
@@ -53,14 +54,14 @@ const Caller = ({ socket, callTo = null, showDialer = true }) => {
 				closeCall={() => setRemotePeerIdValue(null)}
 				sendToServer={streamToServer}
 			/>
-			<h2>Your Phone Number: {peerInstance?.id}</h2>
+			<h2>Your Phone Number: {peerInstance?._id}</h2>
 
 			{showDialer && (
 				<Dialer
 					disabled={peerInstance === null}
 					onCallClick={onCallClick}
 					streamingToServer={streamToServer}
-					sendToServer={() => setStreamToServer(!streamToServer)}
+					// sendToServer={() => setStreamToServer(!streamToServer)}
 				/>
 			)}
 		</div>
@@ -95,12 +96,12 @@ const Dialer = ({ disabled, sendToServer, onCallClick, streamingToServer }) => {
 				style={{ marginRight: "10px" }}>
 				Call
 			</Button>
-			<Button
+			{/* <Button
 				disabled={disabled}
 				variant='contained'
 				onClick={sendToServer}>
-				{streamingToServer ? "Stop Stream" : "Start Stream"}
-			</Button>
+				{streamingToServer ? "Stop Streaming" : "Stream To Server"}
+			</Button> */}
 		</div>
 	);
 };
