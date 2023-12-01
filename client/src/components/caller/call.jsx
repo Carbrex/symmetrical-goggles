@@ -1,17 +1,33 @@
 import { useEffect, useRef, useState } from "react";
-import Peer from "peerjs";
 import { toast } from "react-toastify";
 import Visualizer from "../visualizer";
 import Confirmation from "../confirmation";
+import { Button } from "@mui/material";
 
 // give default value to peerID
-const Call = ({ peer, socket, callTo = null, sendToServer }) => {
+const Call = ({ peer, socket, callTo = null, closeCall, sendToServer }) => {
 	const [localStream, setLocalStream] = useState(null);
 	const [remoteStream, setRemoteStream] = useState(null);
+	const [isCallActive, setIsCallActive] = useState(false);
 
 	const mediaRecorderRef = useRef(null);
 	const audioRef = useRef(null);
 	const callRef = useRef(null);
+	console.log("callTo", callTo);
+
+	const hangUpCall = () => {
+		console.log("Hanging up call");
+		// setLocalStream(null); // Clear local stream
+		setRemoteStream(null); // Clear remote stream
+		setIsCallActive(false); // Update call status
+		closeCall();
+		// if (callRef.current) {
+		// 	callRef.current.close(); // Close the call
+		// 	setLocalStream(null); // Clear local stream
+		// 	setRemoteStream(null); // Clear remote stream
+		// 	setIsCallActive(false); // Update call status
+		// }
+	};
 
 	const setMediaRecorder = (stream) => {
 		try {
@@ -70,7 +86,7 @@ const Call = ({ peer, socket, callTo = null, sendToServer }) => {
 	const call = async (remotePeerId) => {
 		console.log("Calling peer " + remotePeerId);
 		toast.info("Calling peer " + remotePeerId + "...", {
-			toastId: "callTo",
+			toastId: "calling",
 			autoClose: false,
 		});
 		askPermissionForMic()
@@ -81,27 +97,20 @@ const Call = ({ peer, socket, callTo = null, sendToServer }) => {
 						console.error("Peer not initialized");
 						return;
 					}
-					console.log(peer);
-					console.log(remotePeerId);
-					console.log(localStream);
-					console.log(mediaStream);
-					const call12 = peer.call(remotePeerId, mediaStream);
-					// console.log();
-					// callRef.current = peer.call(remotePeerId, localStream);
-					// callRef.current.on("stream", (stream) => {
-					call12.on("stream", (stream) => {
-						toast.dismiss("callTo");
-						console.log("Got remote stream");
-						console.log(stream);
+					callRef.current = peer.call(remotePeerId, mediaStream);
+					callRef.current.on("stream", (stream) => {
+						toast.dismiss("calling");
 						playAudio(stream);
+						setIsCallActive(true);
 					});
+					callRef.current.on("close", hangUpCall);
 				} catch (error) {
 					console.log(error);
 				}
 			})
-			.catch((permissionDenied) => {
-				toast.dismiss("callTo");
-				console.error("Permission denied");
+			.catch((err) => {
+				toast.dismiss("calling");
+				console.log(err);
 			});
 	};
 
@@ -114,6 +123,9 @@ const Call = ({ peer, socket, callTo = null, sendToServer }) => {
 					.then((mediaStream) => {
 						call.answer(mediaStream);
 						call.on("stream", playAudio);
+						call.on("close", hangUpCall);
+						callRef.current = call;
+						setIsCallActive(true);
 					})
 					.catch((err) => {
 						console.log(err);
@@ -154,9 +166,6 @@ const Call = ({ peer, socket, callTo = null, sendToServer }) => {
 
 		setStreamingToServer(mediaRecorderRef.current.state === "recording");
 	};
-	const createObjectURL = (stream) => {
-		return URL.createObjectURL(stream);
-	};
 
 	return (
 		<>
@@ -165,6 +174,15 @@ const Call = ({ peer, socket, callTo = null, sendToServer }) => {
 				remoteStream={remoteStream}
 			/>
 			<audio ref={audioRef} />
+			{isCallActive && (
+				<Button
+					variant='contained'
+					onClick={() => {
+						callRef.current.close();
+					}}>
+					Hang Up
+				</Button>
+			)}
 		</>
 	);
 };

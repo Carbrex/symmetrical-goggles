@@ -2,9 +2,11 @@
 	cursor: pointer;
 	border-radius: 8px;
 	border: 0.2vw solid black;
-	padding: 0.2vh 0.2vw;
+	padding: 1vh 0.5vw;
 	margin-right: 5px;
 	transition: all 0.4s;
+	background-color: #103996;
+	color: white;
 
 	&:disabled {
 		cursor: not-allowed;
@@ -12,8 +14,6 @@
 	&:focus {
 		outline: none;
 	}
-	background-color: black;
-	color: white;
 }
 
 .btn:hover {

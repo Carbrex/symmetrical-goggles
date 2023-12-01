@@ -3,13 +3,16 @@ import Peer from "peerjs";
 import { toast } from "react-toastify";
 import Call from "./call";
 import { Button } from "@mui/material";
+import { set } from "lodash";
 
 // give default value to peerID
 const Caller = ({ socket, callTo = null, showDialer = true }) => {
-	const [remotePeerIdValue, setRemotePeerIdValue] = useState(callTo);
+	const [remotePeerIdValue, setRemotePeerIdValue] = useState(null);
 	const [streamToServer, setStreamToServer] = useState(false);
 
 	const [peerInstance, setPeerInstance] = useState(null);
+	console.log("callTo", callTo);
+	console.log("remotePeerIdValue", remotePeerIdValue);
 
 	useEffect(() => {
 		const peer = new Peer(undefined, {
@@ -34,6 +37,10 @@ const Caller = ({ socket, callTo = null, showDialer = true }) => {
 		};
 	}, []);
 
+	useEffect(() => {
+		if (callTo) setRemotePeerIdValue(callTo);
+	}, [callTo]);
+
 	const onCallClick = (remoteId) => {
 		setRemotePeerIdValue(remoteId);
 	};
@@ -44,6 +51,7 @@ const Caller = ({ socket, callTo = null, showDialer = true }) => {
 				peer={peerInstance}
 				socket={socket}
 				callTo={remotePeerIdValue}
+				closeCall={() => setRemotePeerIdValue(null)}
 				sendToServer={streamToServer}
 			/>
 			<h2>Your Phone Number: {peerInstance?.id}</h2>
