@@ -4,11 +4,11 @@ import { Helmet } from "react-helmet-async";
 import { useState, useEffect } from "react";
 import Caller from "../components/caller";
 
-import angryFace from "../../public/assets/images/angry-face.svg";
-import sadFace from "../../public/assets/images/disappointed-face.svg";
-import neutralFace from "../../public/assets/images/neutral-face.svg";
-import disgustFace from "../../public/assets/images/woozy-face.svg";
-import happyFace from "../../public/assets/images/grinning-face.svg";
+import angryFace from "../assets/angry-face.svg";
+import sadFace from "../assets/disappointed-face.svg";
+import neutralFace from "../assets/neutral-face.svg";
+import disgustFace from "../assets/woozy-face.svg";
+import happyFace from "../assets/grinning-face.svg";
 
 // ----------------------------------------------------------------------
 

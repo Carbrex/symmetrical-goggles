@@ -1,7 +1,7 @@
 //Express App Imports
 const express = require("express");
 const path = require("path");
-const http = require("https");
+const http = require("http");
 const fs = require("fs");
 const favicon = require("serve-favicon");
 
@@ -13,15 +13,45 @@ require("dotenv").config();
 const connectDB = require("./db/connect");
 
 // HTTPs Certificates
-const options = {
-	key: fs.readFileSync("certficiate/key.pem"),
-	cert: fs.readFileSync("certficiate/cert.crt"),
-};
+// const options = {
+// 	key: fs.readFileSync("certficiate/key.pem"),
+// 	cert: fs.readFileSync("certficiate/cert.crt"),
+// };
 
 //Start Express App
 const app = express();
-const server = http.createServer(options, app);
-// const server = http.createServer(app);
+// const server = http.createServer(options, app);
+const server = http.createServer(app);
+
+//scoket.io
+const io = require("socket.io")(server, {
+	cors: {
+		origin: [
+			"http://localhost:5173",
+			"https://admin.socket.io",
+			"192.168.1.7",
+			"*",
+		],
+	},
+});
+require("./socketio")(io);
+//Admin UI for Socket.io
+const { instrument } = require("@socket.io/admin-ui");
+instrument(io, { auth: false });
+
+//Peer Server
+// const peerServer = require("peer").ExpressPeerServer(server, {
+// 	path: "/myapp",
+// });
+// app.use(peerServer);
+app.use(require("./PeerServer")(server, "/call"));
+
+//Setting Environment
+const PORT = process.env.PORT || 5000;
+app.set("trust proxy", 1);
+
+//Body Parser Middleware
+app.use(favicon(path.join(__dirname, "../client/dist/favicon", "favicon.ico")));
 
 //Logger Middleware
 app.use(
@@ -39,38 +69,6 @@ app.use(
 		}),
 	})
 );
-
-//scoket.io
-const io = require("socket.io")(server, {
-	cors: {
-		origin: [
-			"https://localhost:5173",
-			"http://localhost:5173",
-			"http://192.168.1.13:5173",
-			"https://192.168.1.13:5173",
-			"https://admin.socket.io",
-			"*",
-		],
-	},
-});
-require("./socketio")(io);
-//Admin UI for Socket.io
-const { instrument } = require("@socket.io/admin-ui");
-instrument(io, { auth: false, mode: "development" });
-
-//Peer Server
-// const peerServer = require("peer").ExpressPeerServer(server, {
-// 	path: "/myapp",
-// });
-// app.use(peerServer);
-app.use(require("./PeerServer")(server, "/call"));
-
-//Setting Environment
-const PORT = process.env.PORT || 5000;
-app.set("trust proxy", 1);
-
-//Body Parser Middleware
-app.use(favicon(path.join(__dirname, "../client/dist/favicon", "favicon.ico")));
 
 //Routes
 app.use("/", express.static("../client/dist"));
@@ -99,7 +97,7 @@ async function start() {
 		// await connectDB(process.env.MONGO_URL);
 		// console.log("Connected to the DataBase Sucessfully");
 		server.listen(PORT, () => {
-			console.log(`Server is listening on https://localhost:${PORT}`);
+			console.log(`Server is listening on http://localhost:${PORT}`);
 		});
 		// textAnalysis("./test.wav");
 	} catch (error) {

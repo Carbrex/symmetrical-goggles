@@ -3,7 +3,6 @@ import Confirmation from "../confirmation";
 import Visualizer from "../visualizer";
 import { toast } from "react-toastify";
 import { Button } from "@mui/material";
-import { set } from "lodash";
 
 // give default value to peerID
 const Call = ({ peer, socket, callTo = null, closeCall, sendToServer }) => {
@@ -76,9 +75,9 @@ const Call = ({ peer, socket, callTo = null, closeCall, sendToServer }) => {
 				callRef.current = callInstance;
 			})
 			.catch((err) => {
-				toast.dismiss("call");
-				call.close();
 				console.log(err);
+				toast.dismiss("call");
+				call?.close();
 			});
 	};
 
@@ -160,9 +159,8 @@ const Call = ({ peer, socket, callTo = null, closeCall, sendToServer }) => {
 	};
 
 	useEffect(() => {
-		console.log("sendToServer", sendToServer);
+		// console.log("sendToServer", sendToServer);
 		if (sendToServer === false) return;
-		console.log(isCallActive);
 		if (isCallActive === true) {
 			setMediaRecorder();
 			console.log(localMediaRecorderRef.current);

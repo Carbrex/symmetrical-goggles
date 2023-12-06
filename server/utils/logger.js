@@ -8,6 +8,7 @@ const logger = winston.createLogger({
 		warning: 1,
 		info: 2,
 		socket: 3,
+		python: 4,
 	},
 	// format: combine(timestamp(), prettyPrint()),
 	transports: [
@@ -40,6 +41,12 @@ logger.socket = function (eventName, id = null, data = null) {
 	this.info({
 		level: "socket",
 		message: `Socket: ${eventName}, ID:${id}, Data: ${JSON.stringify(data)}`,
+	});
+};
+logger.python = function (eventName, pid = null, data = null) {
+	this.info({
+		level: "python",
+		message: `Python: ${eventName}, PID:${pid}, Data: ${JSON.stringify(data)}`,
 	});
 };
 

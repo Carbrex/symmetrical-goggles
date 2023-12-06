@@ -13,7 +13,9 @@ const Caller = ({ socket, callTo = null, isCaller = false }) => {
 
 	useEffect(() => {
 		const peer = new Peer(undefined, {
-			host: import.meta.env.DEV ? "localhost" : window.location.hostname,
+			host: import.meta.env.DEV
+				? window.location.hostname
+				: window.location.hostname,
 			port: 443,
 			path: "/call",
 			secure: true,
