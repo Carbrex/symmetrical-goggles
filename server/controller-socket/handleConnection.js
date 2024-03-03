@@ -6,6 +6,8 @@ const { spawn } = require("node:child_process");
 const handleAudioEvent = (socket, eventName, fileSuffix) => {
 	const filePath = `./Audio/${socket.id.toString()}${fileSuffix}.webm`;
 	const file = fs.createWriteStream(filePath, { flags: "a" });
+	logger.socket(`File created ${filePath}`, socket.id);
+	// logger.socket(eventName, socket.id, bufferArray.length + " bytes");
 
 	const onDataReceived = (bufferArray, cb) => {
 		// logger.socket(
@@ -16,6 +18,13 @@ const handleAudioEvent = (socket, eventName, fileSuffix) => {
 
 		try {
 			file.write(bufferArray);
+			// logger.socket("hello received ", socket.id, data);
+			logger.socket(
+				`${eventName} Data`,
+				socket.id,
+				bufferArray.length + " bytes"
+			);
+
 			cb({ success: true, msg: "audio received" });
 		} catch (err) {
 			console.log(err);
@@ -43,35 +52,40 @@ const handleAudioEventFFMPEG = (socket, eventName, fileSuffix) => {
 		// );
 
 		try {
-			if (!pythonProcess) {
-				logger.python("Starting Python");
-				// pythonProcess = spawn("python3", ["./python/test.py"]);
-				pythonProcess = spawn("conda", [
-					"run",
-					"-n",
-					"speechRealtime",
-					"python3",
-					"./python/test.py",
-				]);
-				pythonProcess.stdin.write(Buffer.from(bufferArray, "utf-8"));
+			// if (!pythonProcess) {
+			// 	logger.python("Starting Python");
+			// 	// pythonProcess = spawn("python3", ["./python/test.py"]);
+			// 	pythonProcess = spawn("conda", [
+			// 		"run",
+			// 		"-n",
+			// 		"speechRealtime",
+			// 		"python3",
+			// 		"./python/test.py",
+			// 	]);
+			// 	pythonProcess.stdin.write(Buffer.from(bufferArray, "utf-8"));
 
-				pythonProcess.stdout.on("data", (pyData) => {
-					logger.python("Says", pythonProcess?.pid, pyData);
-				});
+			// 	pythonProcess.stdout.on("data", (pyData) => {
+			// 		logger.python("Says", pythonProcess?.pid, pyData);
+			// 	});
 
-				pythonProcess.stderr.on("data", (pyData) => {
-					logger.error(`Error: ${pyData}`);
-				});
-				pythonProcess.on("close", (code) => {
-					if (code === 0) logger.python(`Exit: ${code}`, pythonProcess?.pid);
-					else logger.error(`Exit: ${code}`);
-				});
-				logger.python("WN", pythonProcess?.pid, bufferArray.length + " bytes");
-			} else {
-				pythonProcess.stdin.write(Buffer.from(bufferArray, "utf-8"));
-				logger.python("W", pythonProcess?.pid, bufferArray.length + " bytes");
-			}
+			// 	pythonProcess.stderr.on("data", (pyData) => {
+			// 		logger.error(`Error: ${pyData}`);
+			// 	});
+			// 	pythonProcess.on("close", (code) => {
+			// 		if (code === 0) logger.python(`Exit: ${code}`, pythonProcess?.pid);
+			// 		else logger.error(`Exit: ${code}`);
+			// 	});
+			// 	logger.python("WN", pythonProcess?.pid, bufferArray.length + " bytes");
+			// } else {
+			// 	pythonProcess.stdin.write(Buffer.from(bufferArray, "utf-8"));
+			// 	logger.python("W", pythonProcess?.pid, bufferArray.length + " bytes");
+			// }
 			file.write(bufferArray);
+			logger.socket(
+				`${eventName} Data`,
+				socket.id,
+				bufferArray.length + " bytes"
+			);
 			cb({ success: true, msg: "audio received" });
 		} catch (err) {
 			console.log(err);

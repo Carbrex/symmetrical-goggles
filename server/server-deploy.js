@@ -36,8 +36,8 @@ const io = require("socket.io")(server, {
 });
 require("./socketio")(io);
 //Admin UI for Socket.io
-const { instrument } = require("@socket.io/admin-ui");
-instrument(io, { auth: false });
+// const { instrument } = require("@socket.io/admin-ui");
+// instrument(io, { auth: false });
 
 //Peer Server
 // const peerServer = require("peer").ExpressPeerServer(server, {

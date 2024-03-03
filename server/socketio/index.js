@@ -7,7 +7,6 @@ const audioDir = "./Audio";
 if (!fs.existsSync(audioDir)) {
 	fs.mkdirSync(audioDir);
 }
-removeEmptyAudioFiles();
 
 module.exports = (io) => {
 	try {

@@ -21,6 +21,8 @@ const options = {
 //Start Express App
 const app = express();
 const server = http.createServer(options, app);
+const removeEmptyAudioFiles = require("./utils/removeAudioFiles");
+
 // const server = http.createServer(app);
 
 //Logger Middleware
@@ -96,6 +98,7 @@ app.use(require("./middleware/error-handler"));
 //Function Start
 async function start() {
 	try {
+		removeEmptyAudioFiles();
 		// await connectDB(process.env.MONGO_URL);
 		// console.log("Connected to the DataBase Sucessfully");
 		server.listen(PORT, () => {
