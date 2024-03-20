@@ -2,6 +2,13 @@ const fs = require("fs");
 const logger = require("../utils/logger");
 const ffmpeg = require("fluent-ffmpeg");
 const { spawn } = require("node:child_process");
+const axios = require("axios");
+
+const url = "http://localhost:8501/v1/models/fashion_model:predict";
+const headers = {
+	"Content-Type": "application/json",
+	"Accept-Charset": "UTF-8",
+};
 
 const handleAudioEvent = (socket, eventName, fileSuffix) => {
 	const filePath = `./Audio/${socket.id.toString()}${fileSuffix}.webm`;
@@ -24,6 +31,47 @@ const handleAudioEvent = (socket, eventName, fileSuffix) => {
 				socket.id,
 				bufferArray.length + " bytes"
 			);
+
+			//print details about bufferArray
+			// console.log(bufferArray);
+			// console.log(typeof bufferArray);
+			// console.log(Array.from(bufferArray));
+			if (bufferArray.byteLength % 2 !== 0) {
+				throw new Error("Byte length of bufferArray is not a multiple of 2");
+			}
+
+			const int16Array = new Int16Array(bufferArray.buffer);
+
+			// Convert the typed array to an array of numbers
+			const audioData = Array.from(int16Array);
+
+			// Prepare the data payload in the required format for the model API
+			const data = JSON.stringify({
+				inputs: { lstm_input: audioData },
+			});
+			// console.log(data);
+
+			axios
+				.post(url, data, { headers })
+				.then((response) => {
+					if (response.status !== 200) {
+						console.log("Error");
+						return;
+					}
+					const result = response.data;
+					console.log(result);
+					const predictions = result.outputs;
+					// Process predictions as needed
+				})
+				.catch((error) => {
+					console.log("Error");
+					// console.log(error.response.status);
+					// console.log(typeof error.response.data);
+					// console.log(error.response.data.error);
+					console.log(error.response.data);
+					// console.log("Error in req: " + error.response.data.error);
+					// console.error("Error:", error);
+				});
 
 			cb({ success: true, msg: "audio received" });
 		} catch (err) {

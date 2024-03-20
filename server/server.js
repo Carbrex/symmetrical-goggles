@@ -50,6 +50,8 @@ const io = require("socket.io")(server, {
 			"http://localhost:5173",
 			"http://192.168.1.13:5173",
 			"https://192.168.1.13:5173",
+			"http://192.168.1.7:5173",
+			"https://192.168.1.7:5173",
 			"https://admin.socket.io",
 			"*",
 		],
